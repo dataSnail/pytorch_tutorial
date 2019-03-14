@@ -9,7 +9,7 @@ EPOCH = 1
 BATCH_SIZE = 50
 LR = 0.001
 DOWNLOAD_MINST=False
-if_use_gpu = False
+if_use_gpu = False #是否使用GPU计算，必须有N卡
 
 train_data =torchvision.datasets.MNIST(
     root='./mnist',
@@ -35,15 +35,15 @@ class CNN(nn.Module):
         super(CNN, self).__init__()
         self.conv1 = nn.Sequential(
             nn.Conv2d(
-                in_channels = 1,
-                out_channels = 16,
-                kernel_size = 5,
-                stride=1,
-                padding=2,
+                in_channels = 1, #the number of channel
+                out_channels = 16, #输出的channel数量
+                kernel_size = 5, #过滤器（核）数量
+                stride=1, #步长
+                padding=2, #扩展
             ),
-            nn.ReLU(),
+            nn.ReLU(), #非线性变换
             
-            nn.MaxPool2d(kernel_size=2),
+            nn.MaxPool2d(kernel_size=2), #池化层
         )
 
         self.conv2 = nn.Sequential(
